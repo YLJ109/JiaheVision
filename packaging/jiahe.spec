@@ -1,4 +1,5 @@
 from pathlib import Path
+import os
 from PyInstaller.utils.hooks import collect_data_files, collect_dynamic_libs, collect_submodules
 
 root = Path(SPECPATH).parent
@@ -6,7 +7,7 @@ datas = [(str(path), 'models') for path in (root / 'models').glob('*')
          if path.suffix in {'.onnx', '.task'}]
 datas += [(str(root / 'assets' / name), 'assets') for name in ('logo.png', 'logo.ico')]
 datas += [(str(path), 'assets/icons') for path in (root / 'assets' / 'icons').glob('*.svg')]
-if (root / 'packaging' / 'seed' / 'jiahe.db').exists():
+if os.environ.get('JIAHE_INCLUDE_PRIVATE_SEED') == '1' and (root / 'packaging' / 'seed' / 'jiahe.db').exists():
     datas += [(str(root / 'packaging' / 'seed' / 'jiahe.db'), 'seed')]
     datas += [(str(path), 'seed/faces') for path in (root / 'packaging' / 'seed' / 'faces').glob('*.jpg')]
 datas += collect_data_files('mediapipe')

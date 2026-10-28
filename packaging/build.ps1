@@ -15,6 +15,10 @@ if ($LASTEXITCODE -ne 0) { throw 'CPU environment preparation failed' }
 if ($LASTEXITCODE -ne 0) { throw 'PyInstaller build failed' }
 $forbidden = Get-ChildItem -LiteralPath 'dist/JiaheVision' -Recurse -File | Where-Object { $_.Name -match '(?i)(cudnn|cublas|cudart|torch|tensorflow)' }
 if ($forbidden) { throw ('Unexpected GPU/heavy dependency: ' + ($forbidden.Name -join ', ')) }
+if ($env:JIAHE_INCLUDE_PRIVATE_SEED -ne '1') {
+    $privateFiles = Get-ChildItem -LiteralPath 'dist/JiaheVision' -Recurse -File | Where-Object { $_.FullName -match '[\\/]seed[\\/]' -or $_.Extension -in '.db', '.sqlite', '.sqlite3', '.jpg', '.jpeg' }
+    if ($privateFiles) { throw 'Public build unexpectedly contains personal data or portraits' }
+}
 & $compiler packaging/installer.iss
 if ($LASTEXITCODE -ne 0) { throw 'Installer build failed' }
 Get-Item -LiteralPath 'output/家和视觉-Setup.exe' | Select-Object FullName, Length

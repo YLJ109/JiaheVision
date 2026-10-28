@@ -27,7 +27,7 @@ python -m venv .buildenv
 
 首次运行后在「学生档案」录入自己的授权照片。源码版数据保存在 data，安装版位于当前用户 LocalAppData/JiaHeVision/data。
 
-公开仓库不包含预录人脸特征、人员资料、数据库及打卡记录。界面预览使用用户授权的照片，不显示人员档案信息。本次仅发布源码和界面图片，不发布 Release。
+公开仓库不包含预录人脸特征、人员资料、数据库及打卡记录。界面预览使用用户授权的照片，不显示人员档案信息。公开安装包从空档案开始，请在本地自行录入。可从 [Releases](https://github.com/YLJ109/JiaheVision/releases) 下载安装包。
 
 ## 验证和打包
 
