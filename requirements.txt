@@ -1,0 +1,9 @@
+PyQt6==6.7.1
+PyQt6-Qt6==6.7.3
+opencv-contrib-python==4.10.0.84
+Pillow==13.0.0
+numpy==1.26.4
+onnxruntime==1.20.1
+mediapipe==1.2.0
+pygrabber==0.2
+comtypes==1.4.17
